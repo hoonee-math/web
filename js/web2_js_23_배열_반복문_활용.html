@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web2_js_22_배열과_반복문</title>
+    <!-- Section 7 배열과 반복문 loop -->
+</head>
+<body>
+    <h1><a href="index.html">WEB</a></h1>
+
+    <input id="night_day" type="button" value="night" onclick="
+    var target = document.querySelector('body');
+    if(this.value === 'night'){
+        target.style.backgroundColor = 'black';
+        target.style.color = 'white';
+        this.value = 'day';
+
+        var alist = document.querySelectorAll('a'); // a 태그를 갖는 모든 태그를 불러옴.
+        var i = 0;
+        while(i < alist.length){                    // a 개수만큼 속성을 바꿔주기 위해 개수 파악
+        alist[i].style.color = 'powderblue';        // a 태그의 모든 color라는 style 속성 값을 하나씩 바꿔줌.
+        i = i + 1;                                  // 반복시키기 위한 코드
+        }
+    } else {
+        target.style.backgroundColor = 'white';
+        target.style.color = 'black';      
+        this.value = 'night';
+
+        var alist = document.querySelectorAll('a');
+        var i = 0;
+        while(i < alist.length){
+        alist[i].style.color = 'blue';
+        i = i + 1;
+        }
+    }
+    ">
+
+
+
+
+
+
+    <ol>
+        <li><a href="1.html">HTML</a></li>
+        <li><a href="2.html">CSS</a></li>
+        <li><a href="3.html">JavaScript</a></li>
+    </ol>
+    <h2>JavaScript</h2>
+    <pre>
+        검사[개발자 도구]를 활용한 실습
+
+        <strong>이 웹 페이지에 있는 a 태그를 (CSS 셀렉터) 가져옴, querySelector라는 함수(메서드,명령어)는 첫번째 태그만 가져옴.</strong>
+        document.querySelector('a')
+        
+        <strong>모든 a 태그를 가져오기 위한 명령어</strong>
+        document.querySelectorAll('a')
+        출력값: [a,a,a,a]
+        설명: querySelectorAll의 결과는 정확한 배열은 아니고 NodeList를 출력해줌.
+
+        <strong>위에서 만들어진 결과를 alist라는 변수에 담고 cosole.log()라고 하면 괄호안의 결과가 콘솔창에서 출력됨.</strong>
+        var alist = document.querySelectorAll('a');
+        console.log(alist[0]);
+
+        <strong>a 태그가 몇개인지도 확인가능</strong>
+        var alist = document.querySelectorAll('a');
+        console.log(alist.length);
+
+        <strong>모든 a 태그와 링크 출력</strong>
+        var alist = document.querySelectorAll('a');
+        var i = 0;
+        while(i < alist.lenght){
+            colose.log(alist[i]);
+            i = i + 1;
+        }
+    </pre>
+
+     
+</body>
+</html>

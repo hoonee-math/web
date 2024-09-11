@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML 엔티티 비교 표</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1><a href="https://claude.ai/chat/60a91bcb-7d88-4850-9b0d-eaea0d9b5032">배열, 반복문 활용 표 만들기 링크</a></h1>
+
+    <h1>동적 HTML 특수 문자 엔티티 테이블</h1>
+    <table id="entityTable">
+        <tr>
+            <th>문자</th>
+            <th>이름</th>
+            <th>엔티티 이름</th>
+            <th>엔티티 숫자</th>
+            <th>Unicode 값</th>
+        </tr>
+    </table>
+
+    <script>
+        const entities = [
+            { char: '<', name: 'less than', entityName: '&lt;', entityNumber: '&#60;', unicode: '&#x3C;' },
+            { char: '>', name: 'greater than', entityName: '&gt;', entityNumber: '&#62;', unicode: '&#x3E;' },
+            { char: '&', name: 'ampersand', entityName: '&amp;', entityNumber: '&#38;', unicode: '&#x26;' },
+            { char: ':', name: 'colon', entityName: '', entityNumber: '&#58;', unicode: '&#x3A;' },
+            { char: ';', name: 'semicolon', entityName: '', entityNumber: '&#59;', unicode: '&#x3B;' },
+            { char: '-', name: 'hyphen', entityName: '', entityNumber: '&#45;', unicode: '&#x2D;' },
+            { char: '=', name: 'equals sign', entityName: '', entityNumber: '&#61;', unicode: '&#x3D;' },
+            { char: '#', name: 'number sign', entityName: '', entityNumber: '&#35;', unicode: '&#x23;' },
+            { char: '"', name: 'quotation mark', entityName: '&quot;', entityNumber: '&#34;', unicode: '&#x22;' },
+            { char: '\'', name: 'apostrophe', entityName: '&apos;', entityNumber: '&#39;', unicode: '&#x27;' },
+            { char: '!', name: 'exclamation mark', entityName: '', entityNumber: '&#33;', unicode: '&#x21;' },
+            { char: '@', name: 'at sign', entityName: '', entityNumber: '&#64;', unicode: '&#x40;' },
+            { char: '$', name: 'dollar sign', entityName: '', entityNumber: '&#36;', unicode: '&#x24;' },
+            { char: '%', name: 'percent sign', entityName: '', entityNumber: '&#37;', unicode: '&#x25;' },
+            { char: '^', name: 'caret', entityName: '', entityNumber: '&#94;', unicode: '&#x5E;' },
+        ];
+
+        const table = document.getElementById('entityTable');
+
+        entities.forEach(entity => {
+            const row = table.insertRow();
+            Object.values(entity).forEach(value => {
+                const cell = row.insertCell();
+                cell.textContent = value || 'N/A';
+            });
+        });
+    </script>
+
+
+
+    <h1>HTML 특수 문자 엔티티 비교 표</h1>
+    <table>
+        <tr>
+            <th>문자</th>
+            <th>이름</th>
+            <th>엔티티 이름</th>
+            <th>엔티티 숫자</th>
+            <th>Unicode 값</th>
+        </tr>
+        <tr>
+            <td>&lt;</td>
+            <td>less than</td>
+            <td>&amp;lt;</td>
+            <td>&amp;#60;</td>
+            <td>&amp;#x3C;</td>
+        </tr>
+        <tr>
+            <td>&gt;</td>
+            <td>greater than</td>
+            <td>&amp;gt;</td>
+            <td>&amp;#62;</td>
+            <td>&amp;#x3E;</td>
+        </tr>
+        <tr>
+            <td>&amp;</td>
+            <td>ampersand</td>
+            <td>&amp;amp;</td>
+            <td>&amp;#38;</td>
+            <td>&amp;#x26;</td>
+        </tr>
+        <tr>
+            <td>:</td>
+            <td>colon</td>
+            <td>N/A</td>
+            <td>&amp;#58;</td>
+            <td>&amp;#x3A;</td>
+        </tr>
+        <tr>
+            <td>;</td>
+            <td>semicolon</td>
+            <td>N/A</td>
+            <td>&amp;#59;</td>
+            <td>&amp;#x3B;</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>hyphen</td>
+            <td>N/A</td>
+            <td>&amp;#45;</td>
+            <td>&amp;#x2D;</td>
+        </tr>
+        <tr>
+            <td>=</td>
+            <td>equals sign</td>
+            <td>N/A</td>
+            <td>&amp;#61;</td>
+            <td>&amp;#x3D;</td>
+        </tr>
+        <tr>
+            <td>#</td>
+            <td>number sign</td>
+            <td>N/A</td>
+            <td>&amp;#35;</td>
+            <td>&amp;#x23;</td>
+        </tr>
+    </table>
+</body>
+</html>
