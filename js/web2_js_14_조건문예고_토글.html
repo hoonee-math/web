@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>web2_js_12_제어할_태그_선택하기</title>
-    <!-- Section 4 CSS 기초 : 제어할 태그 선택하기 -->
+    <!-- Section 6 조건문 예고 -->
 </head>
 <body>
     <h1>WEB</h1>
     <input type="button" value="nigth" onclick="
-        /* search : javasctipt select tag by css selector
-            https://www.google.com/search?q=javasctipt+select+tag+by+css+selector&oq=javasctipt+select+tag+by+css+selector&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBBzU4M2owajeoAgCwAgA&sourceid=chrome&ie=UTF-8
-        */
         document.querySelector('body').style.backgroundColor='black';
         document.querySelector('body').style.color='white';           
     ">
     <input type="button" value="Day" onclick="
         document.querySelector('body').style.backgroundColor='white';
         document.querySelector('body').style.color='black';           
+    ">
+    <input type="button" value="black" onclick="
+        if(document.querySelector('body').dataset.mode === 'Day'){
+            document.querySelector('body').style.backgroundColor='black';
+            document.querySelector('body').style.color='white';        
+            document.querySelector('body').dataset.mode ='Night';
+            this.value = 'Day';
+        } else {
+            document.querySelector('body').style.backgroundColor='white';
+            document.querySelector('body').style.color='black';       
+            document.querySelector('body').dataset.mode ='Day';
+            this.value = 'Night';
+        }
     ">
     <ol>
         <li><a href="1.html">HTML</a></li>

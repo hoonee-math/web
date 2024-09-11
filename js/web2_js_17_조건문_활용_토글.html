@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web2_js_17_조건문_활용</title>
+    <!-- Section 6 조건문 활용 -->
+</head>
+<body>
+    <h1><a href="index.html">WEB</a></h1>
+    <!-- 삽입된 버튼 설명
+    id="night_day"  요소의 고유 식별자 지정 
+    type="button"   버튼 타입의 입력 요소 지정
+    value="night"   버튼에 표시될 텍스트 지정
+    onclick="       클릭 이벤트 발생 시 실행될 JavaScript 코드 시작 
+    -->
+    <input id="night_day" type="button" value="night" onclick="
+        if(document.querySelector('#night_day').value === 'night'){ // 버튼의 현재 값이 'night'인지 확인 
+        document.querySelector('body').style.backgroundColor = 'black';
+        document.querySelector('body').style.color = 'white';
+        document.querySelector('#night_day').value = 'day'; // 버튼의 값을 'day'로 변경
+        } else {
+        document.querySelector('body').style.backgroundColor = 'white';
+        document.querySelector('body').style.color = 'black';
+        document.querySelector('#night_day').value = 'night';
+        }
+    ">
+    <ol>
+        <li><a href="1.html">HTML</a></li>
+        <li><a href="2.html">CSS</a></li>
+        <li><a href="3.html">JavaScript</a></li>
+    </ol>
+    <h2>JavaScript</h2>
+    <p>
+        <h3><a href="https://claude.ai/chat/60a91bcb-7d88-4850-9b0d-eaea0d9b5032">보충 설명 by claude</a></h3><br><br>
+        id="night_day":<br>
+        <br>
+        HTML에서 id 속성은 요소의 고유 식별자를 지정합니다.<br>
+        각 페이지 내에서 id 값은 유일해야 합니다.<br>
+        id는 JavaScript나 CSS에서 특정 요소를 선택하고 조작하는 데 사용됩니다.<br>
+        <br>
+        <br>
+        #night_day (JavaScript에서의 사용):<br>
+        <br>
+        JavaScript에서 #은 id 선택자를 나타냅니다.<br>
+        document.querySelector('#night_day')는 id가 'night_day'인 요소를 선택합니다.<br>
+        #을 사용함으로써 JavaScript는 특정 id를 가진 요소를 빠르게 찾아 조작할 수 있습니다.<br>
+        <br>
+        <br>
+        #의 기능:<br>
+        <br>
+        HTML에서: id 속성 값으로 사용되어 요소에 고유 식별자를 부여합니다.<br>
+        JavaScript에서: id 선택자로 사용되어 특정 id를 가진 요소를 선택합니다.<br>
+        CSS에서도 #은 id 선택자로 사용되어 특정 id를 가진 요소의 스타일을 지정할 수 있습니다.<br>
+    </p>
+</body>
+</html>

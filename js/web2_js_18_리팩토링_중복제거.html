@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web2_js_18_래픽토링_중복제거</title>
+    <!-- Section 6 리팩토링 중복 제거의 중요성 -->
+</head>
+<body>
+    <h1><a href="index.html">WEB</a></h1>
+
+    기본 토글 버튼 (17강의 버전)
+    <input id="night_day" type="button" value="night" onclick="
+        if(document.querySelector('#night_day').value === 'night'){ // 버튼의 현재 값이 'night'인지 확인 
+        document.querySelector('body').style.backgroundColor = 'black';
+        document.querySelector('body').style.color = 'white';
+        document.querySelector('#night_day').value = 'day'; // 버튼의 값을 'day'로 변경
+        } else {
+        document.querySelector('body').style.backgroundColor = 'white';
+        document.querySelector('body').style.color = 'black';
+        document.querySelector('#night_day').value = 'night';
+        }
+    "><br><br>
+
+
+
+    id를 구분해준 버전, 이름이 같은 다른 버튼이 있을 경우에는 첫번째 버튼의 값만 바뀜.
+    <input id="night_day2" type="button" value="night" onclick="
+        if(document.querySelector('#night_day2').value === 'night'){ // 버튼의 현재 값이 'night'인지 확인 
+        document.querySelector('body').style.backgroundColor = 'black';
+        document.querySelector('body').style.color = 'white';
+        document.querySelector('#night_day2').value = 'day'; // 버튼의 값을 'day'로 변경
+        } else {
+        document.querySelector('body').style.backgroundColor = 'white';
+        document.querySelector('body').style.color = 'black';
+        document.querySelector('#night_day2').value = 'night';
+        }
+    "><br><br>
+
+
+
+    document.querySelector('#night_day2') 를 this로 수정한 버전 : 이 버튼을 복사해서 다시 쓸 수 있게됨.
+    <input type="button" value="night" onclick="
+        if(this.value === 'night'){ // 버튼의 현재 값이 'night'인지 확인 
+        document.querySelector('body').style.backgroundColor = 'black';
+        document.querySelector('body').style.color = 'white';
+        this.value = 'day'; // 버튼의 값을 'day'로 변경
+        } else {
+        document.querySelector('body').style.backgroundColor = 'white';
+        document.querySelector('body').style.color = 'black';
+        this.value = 'night';
+        }
+    "><br><br>
+
+
+
+    중복해서 등장하는 'document.querySelector('body')' 를 var target = document.querySelector('body') 를 이용해서 간소화! 중복 제거의 중요성!
+    <input id="night_day" type="button" value="night" onclick="
+        var target = document.querySelector('body');
+        if(this.value === 'night'){
+            target.style.backgroundColor = 'black';
+            target.style.color = 'white';
+            this.value = 'day';
+        } else {
+            target.style.backgroundColor = 'white';
+            target.style.color = 'black';
+            this.value = 'night';
+        }
+    ">
+
+
+
+
+
+
+
+    <ol>
+        <li><a href="1.html">HTML</a></li>
+        <li><a href="2.html">CSS</a></li>
+        <li><a href="3.html">JavaScript</a></li>
+    </ol>
+    <h2>JavaScript</h2>
+    <p>
+        <h3><a href="https://claude.ai/chat/60a91bcb-7d88-4850-9b0d-eaea0d9b5032">보충 설명 by claude</a>여기는 본문 입니다.<br>
+    </p>
+</body>
+</html>
