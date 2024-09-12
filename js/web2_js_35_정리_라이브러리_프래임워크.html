@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web2_js_35_정리_라이브러리_프래임워크</title>
+    <!-- Section 10 web2_js_35_정리_라이브러리_프래임워크 -->
+    <!-- jQuery 라이브러리 불러오기! 링크를 찾아 붙여넣기! js 파일에는 넣을 필요는 없고 함수에서 바로 jQuery 코드를 사용할 수 잇음-->
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+    <script src="web2_js_35_정리_라이브러리_프래임워크.js"></script>
+</head>
+<body>
+    <h1><a href="index.html">WEB</a></h1>
+    <input id="night_day" type="button" value="night" onclick="
+      nightDayHandler(this);
+    ">
+    다른 사람의 도움을 받아서 소프트웨어를 만든다는 점은 비슷
+    <h2>library</h2>
+    도서관? 무언가가 정리정돈 되어있는 곳<br>
+    즉, 내가 만들고자 하는 프로그램에 필요한 부품들이 되는 소프트웨어를 잘 정리정돈 해 놓은, 재사용하기 쉽도록 만들어둔 것이 라이브러리.<br>
+    내가 만들고 있는 프로그램에 사용하는 부품을 가져오는 것<br><br>
+    <h2>framework</h2>
+    만들고자 하는 것이 있을때, 만들고자 하는 것이 무엇이냐에 따라서(게임, 웹, 채팅 등) 그것을 만들려고 할때, 언제나 필요한 공통적인 부분이 있을 수 있고, 만들고자 하는 것에 대한 기획 의도에 따라서 달라지는 부분도 있을 수 있음.<br>
+    공통적인 부분은 프레임워크라는 것을 만들어놓고, 만들고자 하는 기능이나 개성에 따라서 달라지는 부분만 살짝살짝 수정하는 것을 통해서 우리가 만들고자 하는 것을 처음부터 끝까지 만들지 않도록 해주는 반제품과 같은것이 프레임워크<br><br>
+    <h3>library vs framework</h3>
+    라이브러리는 소프트웨어를 만드는 내가 라이브러리를 땡겨와서 쓰는 느낌이람면, 프레임워크는 프레임워크 안에 들어가서 작업하는 느낌.<br><br>
+
+    <h3>js 대표 library: jQuery</h3>
+    오래되고 안정적인 라이브러리<br>
+    라이브러리 설치 방법1: 라이브러리를 직접 찾아서 다운로드 > 파일을 프로젝트 디렉토리에 저장<br>
+    라이브러리 설치 방법2: CDN(Content Delivery Network) 를 찾아봄. 자기들의 서버에 파일을 보관해놓고, script src를 통해서 사용자가 가져갈 수 있게 해줌. 직접 찾아봐야함. 버전에 따라 달라지고, 언제 달라질지 모름.<br><br>
+    <h1>Object</h1>
+    <h2>Create</h2>
+    <script>
+      var coworkers = {
+        "programmer":"hoonee",
+        "designer":"yuri"
+      };
+      document.write("programmer : "+coworkers.programmer+"<br>");
+      document.write("designer : "+coworkers.designer+"<br>");
+      coworkers.bookkeeper = "kh";
+      document.write("bookkeeper : "+coworkers.bookkeeper+"<br>");
+      coworkers["data scientist"] = 'gl';
+      document.write("data scientist : "+coworkers["data scientist"]+"<br>");
+    </script>
+    <h2>Iterate</h2>
+    <script>
+      for(var key in coworkers){ 
+        document.write(key+' : '+coworkers[key]+'<br>');
+      }
+    </script>
+    <h2>Property & Method</h2>
+    <script>
+      coworkers.showAll = function(){
+        for(var key in this){ 
+          document.write(key+' : '+this[key]+'<br>');
+        }
+      } 
+      coworkers.showAll();
+    </script>
+  </body>
+  </html>

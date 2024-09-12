@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web2_js_36_정리_UI_API</title>
+    <!-- Section 10 web2_js_36_정리_UI_API -->
+    <script
+    src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+    <script src="web2_js_35_정리_라이브러리_프래임워크.js"></script>
+</head>
+<body>
+    <h1><a href="index.html">WEB</a></h1>
+    <input id="night_day" type="button" value="night" onclick="
+      nightDayHandler(this);
+    "><br><br>
+
+    <input type="button" value="Click me" onclick="alert('hello world')"> 
+    사용자가 시스템을 제어하기 위해서 사용하는 조작 장치를 ui, user interface라고 부름.<br>
+    경고창은 우리가 만들기도, 만들지 않기도 했음. 경고창은 우리의 의도가 반영되었기 때문에 우리가 만들었다고 할 수도 있지만, 이 한 줄 짜리 코드에는 경고창의 기능이나 모양같은 것들이 일체 설명되어 있지 않음. 그러면 이 경고창은 어떻게 만들어진 것일까?<br>
+    그것은 웹브라우저를 만드는 사람들이 우리 대신에 경고창 기능을 미리 만들어두었다가, 우리가 alert라는 함수를 실행하면 경고창을 띄워주겠다고 js의 사용 설명서를 통해서 약속한 것임. 함수 alert는 경고창을 실행하는 조작장치. 이건 일반인 사용자가 사용하는 것이 아님. 우리가 만들고 있는 이 버튼을 클릭하면 경고창이 뜨는 애플리케이션이 웹브라우저가 가지고 있는 경고창 기능을 alert이라고 하는 js 문법에 따라서 문법의 코드를 이용해서 사용하고 있는것.<br>
+    이렇게 애플리케이션을 만들기 위해서 프로그래밍을 할 때 사용하는 조작 장치를 Application Programming Interface라고 부른다. 줄여서 api!<br>
+  </body>
+  </html>
