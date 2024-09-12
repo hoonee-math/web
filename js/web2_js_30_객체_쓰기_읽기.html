@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web2_js_30_객체_쓰기_읽기</title>
+    <!-- Section 9 web2_js_30_객체_쓰기_읽기 -->
+</head>
+<body>
+  <h1>Object</h1>
+  <h2>Create</h2>
+  <script>
+    var coworkers = {         // cowokers라는 객체를 생성
+      "programmer":"hoonee",  // 객체에 들어갈 요소
+      "designer":"yuri"
+    };
+    document.write("programmer : "+coworkers.programmer+"<br>");    // 객체에서 값 불러오기 
+    document.write("designer : "+coworkers.designer+"<br>");
+    coworkers.bookkeeper = "kh";                                    // 객체에 새로운 값 입력
+    document.write("bookkeeper : "+coworkers.bookkeeper+"<br>");
+    coworkers["data scientist"] = 'gl';                             // 배열에서 어떤 정보를 가져올 때 대괄호를 사용하는 것처럼, 대괄호를 사용하고 그 안에 객체에 넣을 변수명을 넣어줄 수 있음.
+    document.write("data scientist : "+coworkers["data scientist"]+"<br>"); // 마찬가지로 띄어쓰기가 있는 경우 배열과 같은 방법으로 사용해서 쓸 수 있음.
+  </script>
+</body>
+</html>

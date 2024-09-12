@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web2_js_32_객체프로퍼티와 메서드</title>
+    <!-- Section 9 web2_js_32_객체프로퍼티와 메서드 -->
+</head>
+<body>
+  <h1>Object</h1>
+  <h2>Create</h2>
+  <script>
+    var coworkers = {
+      "programmer":"hoonee",  // 객체에 소속된 변수를 property라고 부름 : programmer, designer, bookkeeper, data scientist 를 property
+      "designer":"yuri"
+    };
+    document.write("programmer : "+coworkers.programmer+"<br>");
+    document.write("designer : "+coworkers.designer+"<br>");
+    coworkers.bookkeeper = "kh";
+    document.write("bookkeeper : "+coworkers.bookkeeper+"<br>");
+    coworkers["data scientist"] = 'gl';
+    document.write("data scientist : "+coworkers["data scientist"]+"<br>");
+  </script>
+  <h2>Iterate</h2>
+  <script>
+    for(var key in coworkers){ 
+      document.write(key+' : '+coworkers[key]+'<br>');
+    }
+  </script>
+  <h2>Property & Method</h2>
+  <script>
+    coworkers.showAll = function(){
+      for(var key in this){ 
+        document.write(key+' : '+this[key]+'<br>'); // 이러면 coworkers라는 자기 자신의 객체에 소속된 key 와 property를 불러올 수 있음.
+      }
+    } 
+    coworkers.showAll();
+  </script>
+</body>
+</html>

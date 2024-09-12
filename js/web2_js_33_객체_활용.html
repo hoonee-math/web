@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web2_js_33_객체_활용</title>
+    <!-- Section 9 web2_js_33_객체_활용 -->
+    <script>
+      var Links = {
+        setColor:  function(color){
+          var alist = document.querySelectorAll('a');
+          var i = 0;
+          while(i < alist.length){
+            alist[i].style.color = color;
+            i = i + 1;
+          }
+        }
+      }
+      // function linksetColor(color){
+      //   var alist = document.querySelectorAll('a');
+      //   var i = 0;
+      //   while(i < alist.length){
+      //     alist[i].style.color = color;
+      //     i = i + 1;
+      //   }
+      // }
+      var Body = {
+        setColor: function(color){
+          document.querySelector('body').style.color = color;
+        },
+        setBackgroundColor: function(color){
+          document.querySelector('body').style.backgroundColor = color;
+        }
+      }
+      // function bodySetColor(color){
+      //   document.querySelector('body').style.color = 'black';
+      // }
+      // function bodySetBackgroundColor(color){
+      //   document.querySelector('body').style.backgroundColor = 'white';
+      // }
+      function nightDayHandler(self){
+        var target = document.querySelector('body');
+        if(self.value === 'night'){
+          Body.setBackgroundColor('black');
+          Body.setColor('white');
+          self.value = 'day';
+  
+          Links.setColor('powderblue');
+        } else {
+          Body.setBackgroundColor('white');
+          Body.setColor('black');
+          self.value = 'night';
+  
+          Links.setColor('blue');
+        }
+      }
+    </script>
+</head>
+<body>
+    <h1><a href="index.html">WEB</a></h1>
+    <input id="night_day" type="button" value="night" onclick="
+      nightDayHandler(this);
+    ">
+
+    <h1>Object</h1>
+    <h2>Create</h2>
+    <script>
+      var coworkers = {
+        "programmer":"hoonee",  // 객체에 소속된 변수를 property라고 부름 : programmer, designer, bookkeeper, data scientist 를 property
+        "designer":"yuri"
+      };
+      document.write("programmer : "+coworkers.programmer+"<br>");
+      document.write("designer : "+coworkers.designer+"<br>");
+      coworkers.bookkeeper = "kh";
+      document.write("bookkeeper : "+coworkers.bookkeeper+"<br>");
+      coworkers["data scientist"] = 'gl';
+      document.write("data scientist : "+coworkers["data scientist"]+"<br>");
+    </script>
+    <h2>Iterate</h2>
+    <script>
+      for(var key in coworkers){ 
+        document.write(key+' : '+coworkers[key]+'<br>');
+      }
+    </script>
+    <h2>Property & Method</h2>
+    <script>
+      coworkers.showAll = function(){
+        for(var key in this){ 
+          document.write(key+' : '+this[key]+'<br>'); // 이러면 coworkers라는 자기 자신의 객체에 소속된 key 와 property를 불러올 수 있음.
+        }
+      } 
+      coworkers.showAll();
+    </script>
+  </body>
+  </html>
