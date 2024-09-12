@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web2_js_24_함수 예고</title>
+    <!-- Section 8 함수 -->
+
+    <script>
+        function nightDayHanler(slef){
+            var target = document.querySelector('body');
+            if(slef.value === 'night'){
+                target.style.backgroundColor = 'black';
+                target.style.color = 'white';
+                slef.value = 'day';
+
+                var alist = document.querySelectorAll('a');
+                var i = 0;
+                while(i < alist.length){
+                alist[i].style.color = 'powderblue';
+                i = i + 1;
+                }
+            } else {
+                target.style.backgroundColor = 'white';
+                target.style.color = 'black';      
+                slef.value = 'night';
+
+                var alist = document.querySelectorAll('a');
+                var i = 0;
+                while(i < alist.length){
+                alist[i].style.color = 'blue';
+                i = i + 1;
+                }
+            }  
+        }      
+    </script>
+</head>
+<body>
+    <h1><a href="index.html">WEB</a></h1>
+
+    head 영역에 함수로 만들어서 사용
+    <input id="night_day" type="button" value="night" onclick="
+        nightDayHanler(this);
+    ">
+
+
+    기존 토글 버튼
+    <input id="night_day" type="button" value="night" onclick="
+    var target = document.querySelector('body');
+    if(this.value === 'night'){
+        target.style.backgroundColor = 'black';
+        target.style.color = 'white';
+        this.value = 'day';
+
+        var alist = document.querySelectorAll('a'); // a 태그를 갖는 모든 태그를 불러옴.
+        var i = 0;
+        while(i < alist.length){                    // a 개수만큼 속성을 바꿔주기 위해 개수 파악
+        alist[i].style.color = 'powderblue';        // a 태그의 모든 color라는 style 속성 값을 하나씩 바꿔줌.
+        i = i + 1;                                  // 반복시키기 위한 코드
+        }
+    } else {
+        target.style.backgroundColor = 'white';
+        target.style.color = 'black';      
+        this.value = 'night';
+
+        var alist = document.querySelectorAll('a');
+        var i = 0;
+        while(i < alist.length){
+        alist[i].style.color = 'blue';
+        i = i + 1;
+        }
+    }
+    ">
+
+
+
+    <ol>
+        <li><a href="1.html">HTML</a></li>
+        <li><a href="2.html">CSS</a></li>
+        <li><a href="3.html">JavaScript</a></li>
+    </ol>
+    <h2>JavaScript</h2>
+    <pre>
+        
+
+    </pre>
+
+     
+</body>
+</html>
