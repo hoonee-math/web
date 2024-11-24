@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout Structure Generator</title>
+    <link rel="stylesheet" href="./css/layoutStructureGenerator.css">
+    <link rel="stylesheet" href="./css/generators.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="control-section">
+                <div class="title">
+                    <div class="logo-container">
+                        <img src="./image/hoonee-math_logo.png" alt="hoonee-math_logo">
+                    </div>
+                    <div class="my-link-list">
+                        <a href="https://blog.naver.com/hoonee-math" target="_blank" rel="noopener noreferrer">
+                            <img src="./image/naver_blog.png" alt="naver_blog">
+                        </a>
+                        <a href="https://github.com/hoonee-math" target="_blank" rel="noopener noreferrer">
+                            <img src="./image/gitHub.png" alt="github">
+                        </a>
+                    </div>
+                </div>
+                <div class="generator-header">
+                    <div class="generator-selector">
+                        <button class="generator-title" onclick="toggleGeneratorList()">
+                            <h2><span id="currentGenerator">레이아웃 설정</span></h2>
+                            <span class="arrow-icon">▼</span>
+                        </button>
+                        <!-- 빈 컨테이너만 제공, 내용은 JS에서 동적 생성 -->
+                        <div class="generator-list"></div>
+                    </div>
+                </div>
+                
+                <!-- 기본 구조 선택 -->
+                <div class="style-group">
+                    <h3>기본 구조</h3>
+                    <div class="style-input">
+                        <label>헤더 포함</label>
+                        <input type="checkbox" id="includeHeader" checked>
+                    </div>
+                    <div class="style-input">
+                        <label>푸터 포함</label>
+                        <input type="checkbox" id="includeFooter" checked>
+                    </div>
+                    <div class="style-input">
+                        <label>사이드바 포함</label>
+                        <input type="checkbox" id="includeAside">
+                    </div>
+                </div>
+
+                <!-- 헤더 설정 -->
+                <div class="style-group header-options">
+                    <h3>헤더 설정</h3>
+                    <div class="style-input">
+                        <label>위치</label>
+                        <select id="headerPosition">
+                            <option value="outside">최상단 고정</option>
+                            <option value="inside">컨텐츠 내부</option>
+                        </select>
+                    </div>
+                    <div class="style-input">
+                        <label>높이</label>
+                        <input type="number" id="headerHeight" value="60" min="40" max="200"> px
+                    </div>
+                    <div class="style-input">
+                        <label>고정 위치</label>
+                        <select id="headerSticky">
+                            <option value="none">없음</option>
+                            <option value="sticky">스크롤 시 고정</option>
+                            <option value="fixed">항상 고정</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 메인 컨텐츠 설정 -->
+                <div class="style-group">
+                    <h3>메인 컨텐츠 설정</h3>
+                    <div class="style-input">
+                        <label>최대 너비</label>
+                        <input type="number" id="maxWidth" value="1200" min="800" max="1920"> px
+                    </div>
+                    <div class="style-input">
+                        <label>여백</label>
+                        <input type="number" id="contentPadding" value="20" min="0" max="100"> px
+                    </div>
+                    <div class="style-input">
+                        <label>섹션 분할</label>
+                        <select id="sectionLayout">
+                            <option value="single">단일 섹션</option>
+                            <option value="two-equal">2단 균등 분할</option>
+                            <option value="three-equal">3단 균등 분할</option>
+                            <option value="main-aside">메인 + 사이드</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 사이드바 설정 -->
+                <div class="style-group aside-options">
+                    <h3>사이드바 설정</h3>
+                    <div class="style-input">
+                        <label>위치</label>
+                        <select id="asidePosition">
+                            <option value="left">왼쪽</option>
+                            <option value="right">오른쪽</option>
+                        </select>
+                    </div>
+                    <div class="style-input">
+                        <label>너비</label>
+                        <input type="number" id="asideWidth" value="250" min="150" max="500"> px
+                    </div>
+                    <div class="style-input">
+                        <label>고정 위치</label>
+                        <select id="asideSticky">
+                            <option value="none">없음</option>
+                            <option value="sticky">스크롤 시 고정</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 푸터 설정 -->
+                <div class="style-group footer-options">
+                    <h3>푸터 설정</h3>
+                    <div class="style-input">
+                        <label>높이</label>
+                        <input type="number" id="footerHeight" value="100" min="40" max="400"> px
+                    </div>
+                    <div class="style-input">
+                        <label>위치</label>
+                        <select id="footerPosition">
+                            <option value="normal">일반</option>
+                            <option value="sticky">하단 고정</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 반응형 설정 -->
+                <div class="style-group">
+                    <h3>반응형 설정</h3>
+                    <div class="style-input">
+                        <label>태블릿 중단점</label>
+                        <input type="number" id="tabletBreakpoint" value="768" min="600" max="1024"> px
+                    </div>
+                    <div class="style-input">
+                        <label>모바일 중단점</label>
+                        <input type="number" id="mobileBreakpoint" value="480" min="320" max="599"> px
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="preview-section">
+                <h2>미리보기</h2>
+                <div class="preview-area">
+                    <div class="browser-mockup">
+                        <div class="browser-header">
+                            <div class="browser-buttons">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="browser-address">website.com</div>
+                        </div>
+                        <div class="browser-content">
+                            <div id="layoutContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <h2>코드</h2>
+                <div class="code-tabs">
+                    <button class="tab-btn active" data-tab="html">HTML</button>
+                    <button class="tab-btn" data-tab="css">CSS</button>
+                    <button id="copyCode" class="copy-btn">코드 복사</button>
+                </div>
+                <div class="code-content">
+                    <div id="htmlCode" class="code-panel active"></div>
+                    <div id="cssCode" class="code-panel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/layoutStructureGenerator.js"></script>
+    <script src="./js/generators.js"></script>
+</body>
+</html>

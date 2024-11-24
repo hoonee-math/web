@@ -1,0 +1,253 @@
+
+/* 전체 레이아웃 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 300px;
+    background: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.control-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.style-group {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.style-group h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.style-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.style-input label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.style-input input,
+.style-input select {
+    width: 120px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 미리보기 영역 */
+.preview-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    min-height: 300px;
+}
+
+/* 코드 출력 영역 */
+.code-section {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex: 1;
+}
+
+.code-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tab-btn {
+    padding: 8px 16px;
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tab-btn.active {
+    background: #0066ff;
+    color: white;
+}
+
+.code-panel {
+    display: none;
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.code-panel.active {
+    display: block;
+}
+
+.copy-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #0066ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 메뉴 스타일 */
+.dropdown-btn, .accordion-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    width: 100%;
+}
+
+.dropdown-content, .accordion-content {
+    display: none;
+}
+
+/* 애니메이션 */
+.fade {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fade.show {
+    opacity: 1;
+}
+
+.slide-down {
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.slide-down.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-up {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.slide-up.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 메뉴 유형별 스타일 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.dropdown-content {
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+}
+
+/* slide 스타일을 추가 (기존 메뉴 스타일 섹션에) */
+.slide {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.slide-btn {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.slide-content {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.slide-content.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.accordion {
+    width: 100%;
+    max-width: 300px;
+}
+
+.mega {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.mega-content {
+    position: absolute;
+    min-width: 400px;
+    padding: 20px;
+    z-index: 1;
+    display: none;
+}
+
+.mega-column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+/* 링크 스타일 */
+.menu-item {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+}

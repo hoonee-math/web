@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Card Style Generator</title>
+    <link rel="stylesheet" href="./css/cardGenerator.css">
+    <link rel="stylesheet" href="./css/generators.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="control-section">
+                <div class="title">
+                    <div class="logo-container">
+                        <img src="./image/hoonee-math_logo.png" alt="hoonee-math_logo">
+                    </div>
+                    <div class="my-link-list">
+                        <a href="https://blog.naver.com/hoonee-math" target="_blank" rel="noopener noreferrer">
+                            <img src="./image/naver_blog.png" alt="naver_blog">
+                        </a>
+                        <a href="https://github.com/hoonee-math" target="_blank" rel="noopener noreferrer">
+                            <img src="./image/gitHub.png" alt="github">
+                        </a>
+                    </div>
+                </div>
+                <div class="generator-header">
+                    <div class="generator-selector">
+                        <button class="generator-title" onclick="toggleGeneratorList()">
+                            <h2><span id="currentGenerator">카드 설정</span></h2>
+                            <span class="arrow-icon">▼</span>
+                        </button>
+                        <!-- 빈 컨테이너만 제공, 내용은 JS에서 동적 생성 -->
+                        <div class="generator-list"></div>
+                    </div>
+                </div>
+                
+                <!-- 레이아웃 설정 -->
+                <div class="style-group">
+                    <h3>레이아웃</h3>
+                    <div class="style-input">
+                        <label>카드 개수</label>
+                        <input type="number" id="cardCount" value="3" min="1" max="12">
+                    </div>
+                    <div class="style-input">
+                        <label>그리드 열 개수</label>
+                        <input type="number" id="gridColumns" value="3" min="1" max="4">
+                    </div>
+                    <div class="style-input">
+                        <label>카드 간격</label>
+                        <input type="number" id="cardGap" value="20" min="0" step="4"> px
+                    </div>
+                </div>
+
+                <!-- 카드 크기 -->
+                <div class="style-group">
+                    <h3>카드 크기</h3>
+                    <div class="style-input">
+                        <label>너비</label>
+                        <input type="number" id="cardWidth" value="300" min="200" step="10"> px
+                    </div>
+                    <div class="style-input">
+                        <label>높이</label>
+                        <select id="heightType">
+                            <option value="auto">자동</option>
+                            <option value="fixed">고정</option>
+                            <option value="ratio">비율</option>
+                        </select>
+                    </div>
+                    <div class="style-input height-value" style="display: none;">
+                        <label>높이 값</label>
+                        <input type="number" id="cardHeight" value="400" min="200" step="10"> px
+                    </div>
+                    <div class="style-input ratio-value" style="display: none;">
+                        <label>가로:세로 비율</label>
+                        <select id="aspectRatio">
+                            <option value="1:1">1:1</option>
+                            <option value="4:3">4:3</option>
+                            <option value="16:9">16:9</option>
+                            <option value="3:4">3:4</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 컨텐츠 구성 -->
+                <div class="style-group">
+                    <h3>컨텐츠 구성</h3>
+                    <div class="style-input">
+                        <label>이미지 포함</label>
+                        <input type="checkbox" id="includeImage" checked>
+                    </div>
+                    <div class="image-options">
+                        <div class="style-input">
+                            <label>이미지 위치</label>
+                            <select id="imagePosition">
+                                <option value="top">상단</option>
+                                <option value="bottom">하단</option>
+                                <option value="left">좌측</option>
+                                <option value="right">우측</option>
+                                <option value="background">배경</option>
+                            </select>
+                        </div>
+                        <div class="style-input">
+                            <label>이미지 비율</label>
+                            <input type="number" id="imageRatio" value="40" min="10" max="90"> %
+                        </div>
+                    </div>
+                    <div class="style-input">
+                        <label>요소 포함</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="includeTitle" checked> 제목</label>
+                            <label><input type="checkbox" id="includeSubtitle"> 부제목</label>
+                            <label><input type="checkbox" id="includeText" checked> 본문</label>
+                            <label><input type="checkbox" id="includeButton"> 버튼</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 스타일 설정 -->
+                <div class="style-group">
+                    <h3>스타일</h3>
+                    <div class="style-input">
+                        <label>테두리</label>
+                        <select id="borderStyle">
+                            <option value="none">없음</option>
+                            <option value="solid" selected>실선</option>
+                            <option value="dashed">파선</option>
+                            <option value="dotted">점선</option>
+                        </select>
+                    </div>
+                    <div class="border-options">
+                        <div class="style-input">
+                            <label>두께</label>
+                            <input type="number" id="borderWidth" value="1" min="0" max="10"> px
+                        </div>
+                        <div class="style-input">
+                            <label>색상</label>
+                            <input type="color" id="borderColor" value="#e0e0e0">
+                        </div>
+                        <div class="style-input">
+                            <label>모서리</label>
+                            <input type="number" id="borderRadius" value="8" min="0" max="50"> px
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 그림자 설정 -->
+                <div class="style-group">
+                    <h3>그림자</h3>
+                    <div class="style-input">
+                        <label>스타일</label>
+                        <select id="shadowStyle">
+                            <option value="none">없음</option>
+                            <option value="subtle" selected>은은하게</option>
+                            <option value="medium">중간</option>
+                            <option value="strong">강하게</option>
+                            <option value="custom">직접 설정</option>
+                        </select>
+                    </div>
+                    <div class="shadow-custom" style="display: none;">
+                        <div class="style-input">
+                            <label>X 오프셋</label>
+                            <input type="number" id="shadowX" value="0" min="-50" max="50"> px
+                        </div>
+                        <div class="style-input">
+                            <label>Y 오프셋</label>
+                            <input type="number" id="shadowY" value="2" min="-50" max="50"> px
+                        </div>
+                        <div class="style-input">
+                            <label>흐림</label>
+                            <input type="number" id="shadowBlur" value="10" min="0" max="100"> px
+                        </div>
+                        <div class="style-input">
+                            <label>확장</label>
+                            <input type="number" id="shadowSpread" value="0" min="-50" max="50"> px
+                        </div>
+                        <div class="style-input">
+                            <label>색상</label>
+                            <input type="color" id="shadowColor" value="#000000">
+                            <input type="number" id="shadowOpacity" value="10" min="0" max="100"> %
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 호버 효과 -->
+                <div class="style-group">
+                    <h3>호버 효과</h3>
+                    <div class="style-input">
+                        <label>효과 선택</label>
+                        <select id="hoverEffect" multiple>
+                            <option value="none">없음</option>
+                            <option value="scale">확대</option>
+                            <option value="lift">들어올림</option>
+                            <option value="glow">발광</option>
+                            <option value="border">테두리</option>
+                        </select>
+                    </div>
+                    <div class="hover-options" style="display: none;">
+                        <!-- 선택된 효과에 따라 동적으로 옵션 표시 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="preview-section">
+                <h2>미리보기</h2>
+                <div class="preview-area">
+                    <div id="cardContainer"></div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <h2>코드</h2>
+                <div class="code-tabs">
+                    <button class="tab-btn active" data-tab="html">HTML</button>
+                    <button class="tab-btn" data-tab="css">CSS</button>
+                    <button id="copyCode" class="copy-btn">코드 복사</button>
+                </div>
+                <div class="code-content">
+                    <div id="htmlCode" class="code-panel active"></div>
+                    <div id="cssCode" class="code-panel"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/cardGenerator.js"></script>
+    <script src="./js/generators.js"></script>
+</body>
+</html>

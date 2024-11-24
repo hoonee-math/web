@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>메뉴 스타일 생성기</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="./css/generators.css">
+    <link rel="stylesheet" href="./css/menuStyleGenerator.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="control-section">
+                <div class="title">
+                    <div class="logo-container">
+                        <img src="./image/hoonee-math_logo.png" alt="hoonee-math_logo">
+                    </div>
+                    <div class="my-link-list">
+                        <a href="https://blog.naver.com/hoonee-math" target="_blank" rel="noopener noreferrer">
+                            <img src="./image/naver_blog.png" alt="naver_blog">
+                        </a>
+                        <a href="https://github.com/hoonee-math" target="_blank" rel="noopener noreferrer">
+                            <img src="./image/gitHub.png" alt="github">
+                        </a>
+                    </div>
+                </div>
+                <div class="generator-header">
+                    <div class="generator-selector">
+                        <button class="generator-title" onclick="toggleGeneratorList()">
+                            <h2><span id="currentGenerator">메뉴 생성기</span></h2>
+                            <span class="arrow-icon">▼</span>
+                        </button>
+                        <!-- 빈 컨테이너만 제공, 내용은 JS에서 동적 생성 -->
+                        <div class="generator-list"></div>
+                    </div>
+                </div>
+                
+                <div class="style-group">
+                    <h3>스타일 선택</h3>
+                    <div class="style-input">
+                        <label>메뉴 유형</label>
+                        <select id="menuType">
+                            <option value="dropdown">드롭다운</option>
+                            <option value="slide">슬라이드</option>
+                            <option value="accordion">아코디언</option>
+                            <option value="mega">메가메뉴</option>
+                        </select>
+                    </div>
+                    <div class="style-input">
+                        <label>표시 효과</label>
+                        <select id="animation">
+                            <option value="none">없음</option>
+                            <option value="fade">페이드</option>
+                            <option value="slide-down">슬라이드 다운</option>
+                            <option value="slide-up">슬라이드 업</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="style-group">
+                    <h3>메뉴 구성</h3>
+                    <div class="style-input">
+                        <label>메인 메뉴 수</label>
+                        <input type="number" id="mainMenuCount" value="3" min="1" max="10">
+                    </div>
+                    <div class="style-input">
+                        <label>서브 메뉴 수</label>
+                        <input type="number" id="subMenuCount" value="4" min="0" max="10">
+                    </div>
+                </div>
+
+                <div class="style-group">
+                    <h3>스타일 설정</h3>
+                    <div class="style-input">
+                        <label>테두리 두께</label>
+                        <input type="number" id="borderWidth" value="1" min="0" max="10"> px
+                    </div>
+                    <div class="style-input">
+                        <label>테두리 스타일</label>
+                        <select id="borderStyle">
+                            <option value="solid">실선</option>
+                            <option value="dashed">파선</option>
+                            <option value="dotted">점선</option>
+                            <option value="double">이중선</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="style-group">
+                    <h3>색상 설정</h3>
+                    <div class="style-input">
+                        <label>배경색</label>
+                        <input type="color" id="backgroundColor" value="#ffffff">
+                    </div>
+                    <div class="style-input">
+                        <label>테두리 색상</label>
+                        <input type="color" id="borderColor" value="#cccccc">
+                    </div>
+                    <div class="style-input">
+                        <label>텍스트 색상</label>
+                        <input type="color" id="textColor" value="#000000">
+                    </div>
+                    <div class="style-input">
+                        <label>호버 색상</label>
+                        <input type="color" id="hoverColor" value="#f0f0f0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="preview-section">
+                <h2>미리보기</h2>
+                <div class="preview-area">
+                    <div id="menuContainer"></div>
+                </div>
+            </div>
+
+            <div class="code-section">
+                <h2>코드</h2>
+                <div class="code-tabs">
+                    <button class="tab-btn active" data-tab="html">HTML</button>
+                    <button class="tab-btn" data-tab="css">CSS</button>
+                    <button class="tab-btn" data-tab="js">JavaScript</button>
+                </div>
+                <div class="code-content">
+                    <div id="htmlCode" class="code-panel active"></div>
+                    <div id="cssCode" class="code-panel"></div>
+                    <div id="jsCode" class="code-panel"></div>
+                </div>
+                <button id="copyCode" class="copy-btn">코드 복사</button>
+            </div>
+        </div>
+    </div>
+    <script src="./js/menuStyleGenerator.js"></script>
+    <script src="./js/generators.js"></script>
+</body>
+</html>

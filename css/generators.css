@@ -1,0 +1,114 @@
+/* generator selector styles */
+.generator-header {
+    margin-bottom: 20px;
+}
+
+.generator-selector {
+    position: relative;
+}
+
+.generator-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.generator-title h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.generator-title:hover {
+    background: #f8f8f8;
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease;
+}
+
+.generator-selector.open .arrow-icon {
+    transform: rotate(180deg);
+}
+
+.generator-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+    z-index: 1000;
+}
+
+.generator-selector.open .generator-list {
+    max-height: 300px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.generator-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+}
+
+.generator-item:hover {
+    background: #f0f0f0;
+}
+
+.generator-item.active {
+    background: #e6f0ff;
+    color: #0066ff;
+}
+
+.generator-icon {
+    margin-right: 10px;
+    font-style: normal;
+}
+
+/* 로고 위치 style */
+
+.control-section > .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px 0 10px;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.title > .logo-container {
+    flex: 0 0 70%; /* flex-grow: 0, flex-shrink: 0, flex-basis: 70% */
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+}
+
+.title > .my-link-list {
+    flex: 0 0 30%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    align-items: center;
+}
+
+.my-link-list img {
+    width: 25px;
+    height: auto;
+}

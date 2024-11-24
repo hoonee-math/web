@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>메뉴 스타일 생성기</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .preview-area {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 500px;
+        }
+
+        .control-panel {
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .style-group {
+            margin-bottom: 20px;
+        }
+
+        .style-group h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .style-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .style-input label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .style-input input {
+            width: 100px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .style-input select {
+            width: 100px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .code-output {
+            margin-top: 20px;
+            background: #f8f8f8;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+
+        button {
+            background: #0066ff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 8px;
+        }
+
+        button:hover {
+            background: #0052cc;
+        }
+
+        /* 메뉴 스타일 */
+        .menu-container {
+            margin: 20px 0;
+        }
+
+        /* 드롭다운 스타일 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 160px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background: #f1f1f1;
+        }
+
+        /* 슬라이드 스타일 */
+        .slide {
+            position: relative;
+            display: inline-block;
+        }
+
+        .slide-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 160px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        /* 아코디언 스타일 */
+        .accordion {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .accordion-btn {
+            width: 100%;
+            text-align: left;
+            padding: 10px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 2px;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 10px;
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        /* 메가메뉴 스타일 */
+        .mega {
+            position: relative;
+            display: inline-block;
+        }
+
+        .mega-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 400px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .mega-content .column {
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+        }
+
+        /* 애니메이션 클래스들 */
+        .fade {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fade.show {
+            opacity: 1;
+        }
+
+        .slide-down {
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .slide-down.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .slide-up {
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .slide-up.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="preview-area" id="previewArea">
+            <div class="menu-container" id="menuContainer"></div>
+        </div>
+        <div class="control-panel">
+            <div class="style-group">
+                <h3>메뉴 스타일</h3>
+                <div class="style-input">
+                    <label>스타일 유형</label>
+                    <select id="menuType">
+                        <option value="dropdown">드롭다운</option>
+                        <option value="slide">슬라이드</option>
+                        <option value="accordion">아코디언</option>
+                        <option value="mega">메가메뉴</option>
+                    </select>
+                </div>
+                <div class="style-input">
+                    <label>애니메이션</label>
+                    <select id="animation">
+                        <option value="none">없음</option>
+                        <option value="fade">페이드</option>
+                        <option value="slide-down">슬라이드 다운</option>
+                        <option value="slide-up">슬라이드 업</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="style-group">
+                <h3>메뉴 구성</h3>
+                <div class="style-input">
+                    <label>메인 메뉴 수</label>
+                    <input type="number" id="mainMenuCount" value="3" min="1" max="10">
+                </div>
+                <div class="style-input">
+                    <label>서브 메뉴 수</label>
+                    <input type="number" id="subMenuCount" value="4" min="0" max="10">
+                </div>
+            </div>
+
+            <div class="style-group">
+                <h3>스타일 설정</h3>
+                <div class="style-input">
+                    <label>배경색</label>
+                    <input type="color" id="bgColor" value="#333333">
+                </div>
+                <div class="style-input">
+                    <label>텍스트 색상</label>
+                    <input type="color" id="textColor" value="#ffffff">
+                </div>
+                <div class="style-input">
+                    <label>호버 색상</label>
+                    <input type="color" id="hoverColor" value="#f1f1f1">
+                </div>
+            </div>
+
+            <button id="copyHTML">HTML 복사</button>
+            <button id="copyCSS">CSS 복사</button>
+            <button id="copyJS">JS 복사</button>
+
+            <div class="code-output" id="codeOutput"></div>
+        </div>
+    </div>
+
+    <script>
+        // 전역 변수
+        let currentMenuType = 'dropdown';
+        let currentAnimation = 'none';
+
+        // 요소 참조
+        const menuContainer = document.getElementById('menuContainer');
+        const codeOutput = document.getElementById('codeOutput');
+
+        // 이벤트 리스너
+        document.getElementById('menuType').addEventListener('change', updateMenu);
+        document.getElementById('animation').addEventListener('change', updateMenu);
+        document.getElementById('mainMenuCount').addEventListener('change', updateMenu);
+        document.getElementById('subMenuCount').addEventListener('change', updateMenu);
+        document.getElementById('bgColor').addEventListener('input', updateStyles);
+        document.getElementById('textColor').addEventListener('input', updateStyles);
+        document.getElementById('hoverColor').addEventListener('input', updateStyles);
+
+        // 메뉴 업데이트 함수
+        function updateMenu() {
+            currentMenuType = document.getElementById('menuType').value;
+            currentAnimation = document.getElementById('animation').value;
+            const mainCount = parseInt(document.getElementById('mainMenuCount').value);
+            const subCount = parseInt(document.getElementById('subMenuCount').value);
+
+            // 메뉴 HTML 생성
+            let menuHTML = '';
+            
+            switch(currentMenuType) {
+                case 'dropdown':
+                    for(let i = 1; i <= mainCount; i++) {
+                        menuHTML += `
+                            <div class="dropdown">
+                                <button class="dropdown-btn">메뉴 ${i}</button>
+                                <div class="dropdown-content ${currentAnimation}">`;
+                        for(let j = 1; j <= subCount; j++) {
+                            menuHTML += `<a href="#">서브메뉴 ${i}-${j}</a>`;
+                        }
+                        menuHTML += `</div>
+                            </div>`;
+                    }
+                    break;
+
+                case 'slide':
+                    for(let i = 1; i <= mainCount; i++) {
+                        menuHTML += `
+                            <div class="slide">
+                                <button class="dropdown-btn">메뉴 ${i}</button>
+                                <div class="slide-content ${currentAnimation}">`;
+                        for(let j = 1; j <= subCount; j++) {
+                            menuHTML += `<a href="#">서브메뉴 ${i}-${j}</a>`;
+                        }
+                        menuHTML += `</div>
+                            </div>`;
+                    }
+                    break;
+
+                case 'accordion':
+                    menuHTML += '<div class="accordion">';
+                    for(let i = 1; i <= mainCount; i++) {
+                        menuHTML += `
+                            <button class="accordion-btn">메뉴 ${i}</button>
+                            <div class="accordion-content ${currentAnimation}">`;
+                        for(let j = 1; j <= subCount; j++) {
+                            menuHTML += `<a href="#">서브메뉴 ${i}-${j}</a>`;
+                        }
+                        menuHTML += '</div>';
+                    }
+                    menuHTML += '</div>';
+                    break;
+
+                case 'mega':
+                    for(let i = 1; i <= mainCount; i++) {
+                        menuHTML += `
+                            <div class="mega">
+                                <button class="dropdown-btn">메뉴 ${i}</button>
+                                <div class="mega-content ${currentAnimation}">`;
+                        for(let j = 1; j <= 3; j++) {
+                            menuHTML += `<div class="column">`;
+                            for(let k = 1; k <= Math.ceil(subCount/3); k++) {
+                                menuHTML += `<a href="#">서브메뉴 ${i}-${j}-${k}</a>`;
+                            }
+                            menuHTML += `</div>`;
+                        }
+                        menuHTML += `</div>
+                            </div>`;
+                    }
+                    break;
+            }
+
+            menuContainer.innerHTML = menuHTML;
+            setupEventListeners();
+            updateCode();
+        }
+
+        // 이벤트 리스너 설정
+        function setupEventListeners() {
+            switch(currentMenuType) {
+                case 'dropdown':
+                case 'slide':
+                case 'mega':
+                    document.querySelectorAll('.dropdown-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const content = this.nextElementSibling;
+                            const wasDisplayed = content.style.display === 'block';
+                            
+                            // 다른 모든 메뉴 닫기
+                            document.querySelectorAll('.dropdown-content, .slide-content, .mega-content').forEach(el => {
+                                el.style.display = 'none';
+                                el.classList.remove('show');
+                            });
+
+                            if (!wasDisplayed) {
+                                content.style.display = 'block';
+                                setTimeout(() => content.classList.add('show'), 10);
+                            }
+                        });
+                    });
+                    break;
+
+                case 'accordion':
+                    document.querySelectorAll('.accordion-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const content = this.nextElementSibling;
+                            const wasDisplayed = content.style.display === 'block';
+                            
+                            if (!wasDisplayed) {
+                                content.style.display = 'block';
+                                setTimeout(() => content.classList.add('show'), 10);
+                            } else {
+                                content.classList.remove('show');
+                                setTimeout(() => content.style.display = 'none', 300);
+                            }
+                        });
+                    });
+                    break;
+            }
+        }
+
+        // 스타일 업데이트
+        function updateStyles() {
+            const bgColor = document.getElementById('bgColor').value;
+            const textColor = document.getElementById('textColor').value;
+            const hoverColor = document.getElementById('hoverColor').value;
+
+            document.querySelectorAll('.dropdown-btn, .accordion-btn').forEach(btn => {
+                btn.style.backgroundColor = bgColor;
+                btn.style.color = textColor;
+            });
+
+
+            document.querySelectorAll('.dropdown-content a, .slide-content a, .accordion-content a, .mega-content a').forEach(a => {
+                a.addEventListener('mouseover', function() {
+                    this.style.backgroundColor = hoverColor;
+                });
+                a.addEventListener('mouseout', function() {
+                    this.style.backgroundColor = 'white';
+                });
+            });
+
+            updateCode();
+        }
+
+        // 코드 업데이트 및 출력
+        function updateCode() {
+            const menuType = document.getElementById('menuType').value;
+            const animation = document.getElementById('animation').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const textColor = document.getElementById('textColor').value;
+            const hoverColor = document.getElementById('hoverColor').value;
+
+            // HTML 코드
+            const htmlCode = menuContainer.innerHTML;
+
+            // CSS 코드
+            const cssCode = `
+/* 메뉴 기본 스타일 */
+.${menuType} {
+    position: relative;
+    display: inline-block;
+}
+
+.${menuType}-btn {
+    padding: 10px 20px;
+    background: ${bgColor};
+    color: ${textColor};
+    border: none;
+    cursor: pointer;
+}
+
+.${menuType}-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.${menuType}-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.${menuType}-content a:hover {
+    background-color: ${hoverColor};
+}
+
+/* 애니메이션 스타일 */
+${animation !== 'none' ? `
+.${animation} {
+    ${animation === 'fade' ? `
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    ` : animation === 'slide-down' ? `
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    ` : `
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    `}
+}
+
+.${animation}.show {
+    opacity: 1;
+    transform: translateY(0);
+}` : ''}`;
+
+            // JavaScript 코드
+            const jsCode = `
+// 메뉴 이벤트 리스너
+document.querySelectorAll('.${menuType}-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const wasDisplayed = content.style.display === 'block';
+        
+        // 다른 모든 메뉴 닫기
+        document.querySelectorAll('.${menuType}-content').forEach(el => {
+            el.style.display = 'none';
+            el.classList.remove('show');
+        });
+
+        if (!wasDisplayed) {
+            content.style.display = 'block';
+            setTimeout(() => content.classList.add('show'), 10);
+        }
+    });
+});`;
+
+            // 복사 버튼 이벤트 리스너
+            document.getElementById('copyHTML').onclick = () => {
+                navigator.clipboard.writeText(htmlCode);
+                alert('HTML 코드가 복사되었습니다!');
+            };
+
+            document.getElementById('copyCSS').onclick = () => {
+                navigator.clipboard.writeText(cssCode);
+                alert('CSS 코드가 복사되었습니다!');
+            };
+
+            document.getElementById('copyJS').onclick = () => {
+                navigator.clipboard.writeText(jsCode);
+                alert('JavaScript 코드가 복사되었습니다!');
+            };
+
+            // 코드 미리보기 출력
+            codeOutput.innerHTML = `<strong>HTML 코드:</strong>\n${htmlCode}\n\n<strong>CSS 코드:</strong>\n${cssCode}\n\n<strong>JavaScript 코드:</strong>\n${jsCode}`;
+        }
+
+        // 초기 메뉴 생성
+        updateMenu();
+    </script>
+</body>
+</html>
