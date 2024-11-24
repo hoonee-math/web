@@ -68,6 +68,10 @@
     gap: 20px;
 }
 
+.main-content h2{
+    margin-bottom: 10px;
+}
+
 /* 미리보기 영역 */
 .preview-section {
     background: white;

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome CGH-pages</title>
+    <style>
+        header {
+            height: 20%;
+            margin-bottom: 20%;
+        }
+        #index-logo {
+            width: 80%;
+            display: block; 
+            margin: 0 auto;
+        }
+        #button-container {
+            width: 80%;
+            margin: 50px auto; /* auto로 좌우 중앙 정렬 */
+            text-align: center; /* 버튼 자체를 중앙 정렬 */
+        }
+        .code-generator {
+            text-decoration: none; /* button 대신에 a태그를 상요하여 밑줄 제거 */
+            color: white;
+            display: inline-block;
+            background-color: #4196e1;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(65, 150, 225, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-generator:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(65, 150, 225, 0.4);
+            background-color: #3785d0;
+        }
+
+        .code-generator:active {
+            transform: translateY(1px);
+        }
+
+    </style>
+</head>
+<body>
+<header></header>
+<main>
+    <div>
+        <img src="./image/hoonee-math_logo.png" alt="hoonee-math logo" id="index-logo">
+        <div id="button-container">
+            <a href="menuStyleGenerator.html" class="code-generator">⚡ 코드 생성기로 이동 >></a>
+        </div>
+    </div>
+</main>
+</body>
+</html>
