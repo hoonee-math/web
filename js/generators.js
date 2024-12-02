@@ -17,6 +17,12 @@ const GENERATORS = [
         name: '레이아웃 생성기',
         icon: '📱',
         path: 'layoutStructureGenerator.html'
+    },
+    {
+        id: 'bootStrapGrid',
+        name: 'Grid 생성기',
+        icon: '🪟',
+        path: 'bootstrapGridGenerator.html'
     }
 ];
 
