@@ -90,16 +90,27 @@ class GridGenerator {
 
     setPreviewWidth(width) {
         const widthValue = typeof width === 'string' ? width : `${width}px`;
-        this.previewArea.style.width = widthValue;
-        this.currentWidth.textContent = widthValue;
-
-        // 브레이크포인트 마크 업데이트
-        const currentWidth = parseInt(width);
-        document.querySelectorAll('.breakpoint-marks .mark').forEach(mark => {
-            const markWidth = parseInt(mark.dataset.width);
-            mark.classList.toggle('active', currentWidth <= markWidth);
-        });
-
+        const currentWidthValue = this.previewArea.style.width;
+        
+        // 같은 버튼을 다시 클릭하면 100%로 복귀
+        if (currentWidthValue === widthValue) {
+            this.previewArea.style.width = '100%';
+            this.currentWidth.textContent = '100%';
+            document.querySelectorAll('.breakpoint-marks .mark').forEach(mark => {
+                mark.classList.remove('active');
+            });
+        } else {
+            this.previewArea.style.width = widthValue;
+            this.currentWidth.textContent = widthValue;
+            
+            // 브레이크포인트 마크 업데이트
+            const currentWidth = parseInt(width);
+            document.querySelectorAll('.breakpoint-marks .mark').forEach(mark => {
+                const markWidth = parseInt(mark.dataset.width);
+                mark.classList.toggle('active', currentWidth <= markWidth);
+            });
+        }
+    
         this.updatePreview();
     }
 
@@ -107,7 +118,7 @@ class GridGenerator {
         const newRow = {
             id: Date.now(),
             columns: [
-                { size: 12, offset: 0, order: 0, align: '' }
+                { size: 6, offset: 0, order: 0, align: '' }
             ],
             gutter: this.rowGutter.value,
             justify: this.rowJustify.value,
@@ -144,6 +155,9 @@ class GridGenerator {
             rowElement.classList.add('selected');
         }
 
+        // rowElement를 찾지 못했을 때의 처리 추가
+        if (!rowElement) return;
+        rowElement.classList.add('selected');
         this.selectedRowIndex = index;
         this.selectedRowSettings.style.display = 'block';
         this.loadRowSettings(this.rows[index]);
@@ -212,7 +226,8 @@ class GridGenerator {
     generateColumnOptions(selected) {
         let options = '';
         for (let i = 1; i <= 12; i++) {
-            options += `<option value="${i}" ${i === selected ? 'selected' : ''}>col-${i}</option>`;
+            const isDefault = selected ? i === selected : i === 1;  // 기본값 1로 설정
+            options += `<option value="${i}" ${isDefault ? 'selected' : ''}>col-${i}</option>`;
         }
         return options;
     }
