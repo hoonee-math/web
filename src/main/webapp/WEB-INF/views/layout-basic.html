@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>레이아웃 예시</title>
+    <link rel="stylesheet" href="../../resources/css/common.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 컨테이너 중앙 정렬을 위한 기본 설정 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;  /* 좌우 마진을 auto로 설정하여 중앙 정렬 */
+            padding: 0 20px; /* 모바일 대응을 위한 좌우 여백 */
+        }
+
+        /* 각 섹션 구분을 위한 스타일 */
+        section {
+            padding: 40px 0;
+            border: 2px dashed #ccc;
+            margin-bottom: 20px;
+        }
+
+        /* 컴포넌트 정렬을 위한 flex 사용 예시 */
+        .flex-center {
+            display: flex;
+            justify-content: center;    /* 가로축 중앙 정렬 */
+            align-items: center;        /* 세로축 중앙 정렬 */
+        }
+
+        .flex-between {
+            display: flex;
+            justify-content: space-between; /* 양쪽 끝 정렬 */
+            align-items: center;
+        }
+
+        /* 그리드 레이아웃 예시 */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3열 균등 분할 */
+            gap: 20px;                            /* 그리드 간격 */
+            padding: 20px;
+        }
+
+        /* 컴포넌트 스타일링 */
+        .box {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;         /* 내부 텍스트 중앙 정렬 */
+            border: 1px solid #ddd;
+        }
+
+        /* 인라인 요소 중앙 정렬 */
+        .text-center {
+            text-align: center;
+        }
+
+        /* 영역 구분을 위한 색상 */
+        .area-header { background-color: #ffebee; }
+        .area-main { background-color: #e3f2fd; }
+        .area-footer { background-color: #f1f8e9; }
+
+        /* 설명 텍스트 */
+        .description {
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="container">
+        <div class="description">1. 섹션별 구분과 기본 정렬</div>
+        
+        <section class="area-header">
+            <h2 class="text-center">헤더 영역</h2>
+            <div class="flex-between">
+                <span>왼쪽</span>
+                <span>중앙</span>
+                <span>오른쪽</span>
+            </div>
+        </section>
+
+        <div class="description">2. Flex를 활용한 메인 콘텐츠 배치</div>
+        
+        <section class="area-main">
+            <h2 class="text-center">메인 콘텐츠</h2>
+            <div class="grid-layout">
+                <div class="box">콘텐츠 1</div>
+                <div class="box">콘텐츠 2</div>
+                <div class="box">콘텐츠 3</div>
+            </div>
+        </section>
+
+        <div class="description">3. 푸터 영역 정렬</div>
+        
+        <section class="area-footer">
+            <h2 class="text-center">푸터 영역</h2>
+            <div class="flex-center">
+                <span>Copyright © 2024</span>
+            </div>
+        </section>
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        // 헤더 로드
+        $("#header-container").load("./common/header.html", function() {
+            // 현재 페이지 URL에 따라 active 클래스 추가
+            const currentPage = window.location.pathname.split("/").pop().split(".")[0];
+            $(`.nav-item[data-page="${currentPage.replace('layout-', '')}"]`).addClass('active');
+        });
+    });
+</script>
+</html>

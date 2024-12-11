@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<header class="site-header">
+    <div class="container">
+        <nav class="main-nav">
+            <div class="logo">
+                
+                <a href="../../../../../../index.html"><img src="../../../../../../image/hoonee-math_logo.png" alt="hoonee-math logo" id="index-logo"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="layout-basic.html" class="nav-item" data-page="basic">Basic Layout</a></li>
+                <li><a href="layout-section.html" class="nav-item" data-page="section">Section Layout</a></li>
+                <!-- 추가 메뉴는 여기에 -->
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<style>
+#index-logo {
+    height: 50px;
+    display: block; 
+    margin: 0 auto;
+}
+.site-header {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #666;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.nav-item.active {
+    background-color: #007bff;
+    color: white;
+}
+</style>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>섹션 레이아웃 예시</title>
+    <link rel="stylesheet" href="../../resources/css/common.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .description {
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin: 20px 0;
+        }
+
+        /* 기본적인 섹션 스타일 */
+        section {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* 1. flex를 사용한 두 섹션 배치 */
+        .layout-flex {
+            display: flex;
+            gap: 20px;
+        }
+
+        .sidebar {
+            flex: 0 0 150px;  /* 고정 너비 */
+            background-color: #ffebee;
+        }
+
+        .main-content {
+            flex: 1;         /* 남은 공간 모두 차지 */
+            background-color: #e3f2fd;
+            min-height: 200px;
+        }
+
+        /* 2. grid를 사용한 두 섹션 배치 */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;  /* 고정 너비 + 가변 너비 */
+            gap: 20px;
+        }
+
+        /* 3. float를 사용한 두 섹션 배치 (레거시 지원) */
+        .layout-float::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .layout-float .sidebar {
+            float: left;
+            width: 150px;
+        }
+
+        .layout-float .main-content {
+            margin-left: 170px;  /* sidebar width + gap */
+        }
+
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="container">
+        <div class="description">1. Flex를 사용한 섹션 배치</div>
+        <div class="layout-flex">
+            <section class="sidebar">
+                <h2>사이드바</h2>
+                <p>왼쪽 메뉴 영역</p>
+            </section>
+            <section class="main-content">
+                <h2>메인 콘텐츠</h2>
+                <p>오른쪽 콘텐츠 영역</p>
+            </section>
+        </div>
+
+        <div class="description">2. Grid를 사용한 섹션 배치</div>
+        <div class="layout-grid">
+            <section class="sidebar">
+                <h2>사이드바</h2>
+                <p>왼쪽 메뉴 영역</p>
+            </section>
+            <section class="main-content">
+                <h2>메인 콘텐츠</h2>
+                <p>오른쪽 콘텐츠 영역</p>
+            </section>
+        </div>
+
+        <div class="description">3. Float를 사용한 섹션 배치 (레거시 지원)</div>
+        <div class="layout-float">
+            <section class="sidebar">
+                <h2>사이드바</h2>
+                <p>왼쪽 메뉴 영역</p>
+            </section>
+            <section class="main-content">
+                <h2>메인 콘텐츠</h2>
+                <p>오른쪽 콘텐츠 영역</p>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        // 헤더 로드
+        $("#header-container").load("./common/header.html", function() {
+            // 현재 페이지 URL에 따라 active 클래스 추가
+            const currentPage = window.location.pathname.split("/").pop().split(".")[0];
+            $(`.nav-item[data-page="${currentPage.replace('layout-', '')}"]`).addClass('active');
+        });
+    });
+</script>
+</html>
